@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { response } = require('express');
 const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
@@ -37,7 +38,8 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // create a new category
   try {
-
+    Category.create(req.body)
+      .then((response) => {res.status(200).json(response)})
   } catch (err) {
     res.status(500).json(err);
   }
