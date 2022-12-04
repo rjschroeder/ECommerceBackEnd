@@ -22,7 +22,13 @@ router.get('/:id', (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
-
+    Category.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [Product]
+    })
+      .then((response) => {res.status(200).json(response)})
   } catch (err) {
     res.status(500).json(err);
   }
