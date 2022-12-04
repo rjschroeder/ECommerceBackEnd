@@ -11,9 +11,7 @@ router.get('/', (req, res) => {
     Category.findAll({
       include: [Product]
     })
-      .then((response) => {
-        res.status(200).json(response);
-      })
+      .then((response) => {res.status(200).json(response)})
   } catch (err) {
     res.status(500).json(err);
   }
@@ -48,7 +46,12 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
   try {
-
+    Category.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    })
+      .then((response) => {res.status(200).json(response)})
   } catch (err) {
     res.status(500).json(err);
   }
